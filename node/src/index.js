@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
 });
 
 // Import Routes
-const { TheBookSourcingUser } = require('./src/routes/userRoute');
-const trendingRoutes = require('./src/routes/book/trending/trendingRoutes'); // ✅ trending route
+const { TheBookSourcingUser } = require('./routes/userRoute');
+const trendingRoutes = require('./routes/book/trending/trendingRoutes'); // ✅ trending route
 
 // Initialize Routes
 TheBookSourcingUser(app);
