@@ -412,11 +412,23 @@
   <script>
 async function fetchTrendingBooks() {
   try {
-    const res = await fetch('/api/trending');
-    const books = await res.json();
+    const res = await fetch('http://localhost:3000/api/trending');
+    const result = await res.json();
+
+    // ✅ Flatten all sources into one array
+    const books = [
+      ...(result.data.google || []),
+      ...(result.data.gutenberg || []),
+      ...(result.data.openLibrary || [])
+    ];
 
     const container = document.getElementById('BookContent');
     container.innerHTML = ''; // Clear old content
+
+    if (books.length === 0) {
+      container.innerHTML = `<p>No trending books found right now.</p>`;
+      return;
+    }
 
     books.forEach(book => {
       // ✅ Get cover
@@ -458,6 +470,7 @@ async function fetchTrendingBooks() {
 
 // Load on page
 fetchTrendingBooks();
+
 </script>
   <script src="assets/js/index/darkmode.js" defer></script>
   <script src="assets/js/index/collapseResponsive.js"></script>

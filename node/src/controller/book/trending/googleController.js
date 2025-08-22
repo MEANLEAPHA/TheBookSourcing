@@ -1,9 +1,9 @@
-// Import fetchJson using require
 const { fetchJson } = require('../../../util/apiClient');
 
-// Define the async function
+const API_KEY = process.env.GOOGLE_BOOKS_API_KEY || "AIzaSyA4pGs-ia5mfEL6EoJEWPIL-o6KComj0xY";
+
 async function getGoogleTrending() {
-  const url = "https://www.googleapis.com/books/v1/volumes?q=trending&maxResults=10";
+  const url = `https://www.googleapis.com/books/v1/volumes?q=trending&maxResults=10&key=AIzaSyA4pGs-ia5mfEL6EoJEWPIL-o6KComj0xY`;
   const data = await fetchJson(url);
 
   if (!data || !data.items) return [];
@@ -19,7 +19,4 @@ async function getGoogleTrending() {
   }));
 }
 
-// Export the function using CommonJS
-module.exports = {
-  getGoogleTrending
-};
+module.exports = { getGoogleTrending };
